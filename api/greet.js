@@ -6,9 +6,16 @@ const app = express();
 // Enable CORS
 app.use(cors());
 
+// Middleware to parse JSON
 app.use(express.json());
 
-app.post('/api/greet', (req, res) => {
+// Home route
+app.get('/', (req, res) => {
+  res.send('api working');
+});
+
+// POST route
+app.post('/greet', (req, res) => {
   const { username } = req.body;
 
   if (!username) {
@@ -18,4 +25,5 @@ app.post('/api/greet', (req, res) => {
   res.json({ message: `Hello ${username}` });
 });
 
+// Export for Vercel
 module.exports = app;
